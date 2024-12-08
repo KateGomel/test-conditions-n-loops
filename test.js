@@ -57,4 +57,52 @@ function getNearestBigger(number) {
   return biggerNumber
 }
 
+////
+
+function getNearestBigger_1(number) {
+
+  let tempArray = [];
+  for (let n = number; n > 0; n = Math.floor(n / 10)){
+    const digit = n % 10; 
+    tempArray.push(digit);
+  }
+
+  tempArray.reverse()
+
+  let indexReversal
+  for(indexReversal = tempArray.length-1; indexReversal > 0; indexReversal-=1){
+    if(tempArray[indexReversal-1] < tempArray[indexReversal]) {
+      break;
+    } 
+  }
+
+  if(!indexReversal){
+    return number
+  }
+
+  let indexForSwap
+   for (indexForSwap = tempArray.length - 1; indexForSwap >= indexReversal; indexForSwap-=1) { 
+      if (tempArray[indexForSwap] > tempArray[indexReversal-1]) { 
+          break; 
+        } 
+      }
+      
+  let temp = tempArray[indexReversal-1]
+  tempArray[indexReversal-1] = tempArray[indexForSwap]
+  tempArray[indexForSwap] = temp
+
+  const resultArray = tempArray.slice(0, indexReversal).concat(tempArray.slice(indexReversal).sort((a,b) => a-b))
+  const biggerNumber = resultArray.reduce((acc, item) => acc * 10 + item, 0)
+  return biggerNumber
+}
+
 console.log(getNearestBigger(321321));
+console.log(getNearestBigger_1(321321));
+
+//  * 12345    => 12354
+//  * 123450   => 123504
+//  * 12344    => 12434
+//  * 123440   => 124034
+//  * 1203450  => 1203504
+//  * 90822    => 92028
+//  * 321321   => 322113
