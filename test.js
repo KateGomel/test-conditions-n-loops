@@ -68,7 +68,7 @@ function getNearestBigger_1(number) {
   }
 
   tempArray.reverse()
-
+  
   let indexReversal
   for(indexReversal = tempArray.length-1; indexReversal > 0; indexReversal-=1){
     if(tempArray[indexReversal-1] < tempArray[indexReversal]) {
@@ -86,18 +86,30 @@ function getNearestBigger_1(number) {
           break; 
         } 
       }
-      
+  
   let temp = tempArray[indexReversal-1]
   tempArray[indexReversal-1] = tempArray[indexForSwap]
   tempArray[indexForSwap] = temp
+  
+  const resultArray = []
+  const ArrayForSort = []
 
-  const resultArray = tempArray.slice(0, indexReversal).concat(tempArray.slice(indexReversal).sort((a,b) => a-b))
+  for(let i = 0; i < indexReversal; i += 1){
+    resultArray.push(tempArray[i]);
+  }
+
+  for(let j = indexReversal; j < tempArray.length; j += 1){
+    ArrayForSort.push(tempArray[j]);
+  }
+  ArrayForSort.sort((a,b) => a-b).forEach((item) => resultArray.push(item))
+
   const biggerNumber = resultArray.reduce((acc, item) => acc * 10 + item, 0)
   return biggerNumber
 }
 
 console.log(getNearestBigger(321321));
 console.log(getNearestBigger_1(321321));
+
 
 //  * 12345    => 12354
 //  * 123450   => 123504
