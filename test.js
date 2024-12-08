@@ -92,18 +92,19 @@ function getNearestBigger_1(number) {
   tempArray[indexForSwap] = temp
   
   const resultArray = []
-  const ArrayForSort = []
+  const arrayForSort = []
 
   for(let i = 0; i < indexReversal; i += 1){
     resultArray.push(tempArray[i]);
   }
 
   for(let j = indexReversal; j < tempArray.length; j += 1){
-    ArrayForSort.push(tempArray[j]);
+    arrayForSort.push(tempArray[j]);
   }
-  ArrayForSort.sort((a,b) => a-b).forEach((item) => resultArray.push(item))
+  arrayForSort.sort((a,b) => a-b).forEach((item) => resultArray.push(item))
 
   const biggerNumber = resultArray.reduce((acc, item) => acc * 10 + item, 0)
+
   return biggerNumber
 }
 
